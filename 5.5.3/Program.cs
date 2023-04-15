@@ -10,14 +10,16 @@ namespace Module_5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Напишите что-то");
+            /*Console.WriteLine("Напишите что-то");
             var str = Console.ReadLine();
 
             Console.WriteLine("Укажите глубину эха");
             var deep = int.Parse(Console.ReadLine());
 
-            Echo(str, deep);
-            Console.WriteLine(Factorial(20));
+            //Echo(str, deep);
+            //Console.WriteLine(Factorial(20));*/
+
+            Console.WriteLine(PowerUp(2, 3));
 
             Console.ReadKey();
         }
@@ -49,6 +51,25 @@ namespace Module_5
             else
             {
                 return x * Factorial(x - 1);
+            }
+        }
+
+        private static int PowerUp(int N, byte pow)
+        {
+            if (pow == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                if (pow == 1)
+                {
+                    return N;
+                }
+                else
+                {
+                    return N * PowerUp(N, --pow);
+                }
             }
         }
     }
