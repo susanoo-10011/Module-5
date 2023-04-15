@@ -16,9 +16,9 @@ namespace Итоговый_проект
             ShowData(tuple);
         }
 
-        static (string, string, int, string, int) GetUserData()
+        static (string, string, int, string[], string[]) GetUserData()
         {
-            (string name, string surname, int age, string haveIApet, int favcolors) userData;
+            (string name, string surname, int age, string[] petNames, string[] favcolors) userData;
 
             Console.Write("Введите ваше имя: ");
             userData.name = Console.ReadLine();
@@ -29,54 +29,56 @@ namespace Итоговый_проект
             CheckInformation(ref userData.age);
 
             Console.Write("Есть ли у вас питомец?(есть или нету): ");
-            userData.haveIApet = Console.ReadLine();
-            InformationAboutPets(ref userData.haveIApet);
+            string haveIPet = Console.ReadLine();
+            int pet = 0;
+            while (true)
+            {
+                if (haveIPet == "есть")
+                {
+                    Console.Write("Сколько у вас питомцев? ");
+                    pet = Convert.ToInt32(Console.ReadLine());
+                    CheckInformation(ref pet);
+                    break;
+                }
+                else if (haveIPet == "нету") break;
+                else
+                {
+                    Console.WriteLine("Вы ответили неверно, повторите попытку!");
+                    Console.Write("Есть ли у вас питомец?(есть или нету): ");
+                    haveIPet = Console.ReadLine();
+                }
+            }
+            userData.petNames = GetAnArrayOfNickname(pet);
 
             Console.Write("Сколько в у вас любимых цветов? ");
-            userData.favcolors = Convert.ToInt32(Console.ReadLine());
-            CheckInformation(ref userData.favcolors);
-            GetColors(userData.favcolors);
+            int colors = Convert.ToInt32(Console.ReadLine());
+            CheckInformation(ref colors);
+            userData.favcolors = GetColors(colors);
 
             return userData;
 
         }
 
-        static void ShowData((string name, string surname, int age, string haveIPet, int favcolors) GetUserData)
+        static void ShowData((string name, string surname, int age, string[] petNames, string[] favcolors) GetUserData)
         {
             var tuple = GetUserData;
             Console.WriteLine("\n------------------\n");
             Console.WriteLine("Вот что я узнал о вас: ");
-
             Console.WriteLine($"Ваше имя: {tuple.name}.");
             Console.WriteLine($"Ваша фамилия: {tuple.surname}.");
             Console.WriteLine($"Ваш возраст: {tuple.age}.");
-            Console.WriteLine($"Количество ваших любимых цветов: {tuple.favcolors}");
 
-        }
+            for(int i = 0; i < tuple.petNames.Length; i++)
+            Console.WriteLine($"Вашего {i+1}-ого питомца зовут '{tuple.petNames[i]}' ");
 
-        static void InformationAboutPets(ref string haveIPet)
-        {
-            while (haveIPet != "нету" && haveIPet != "есть")
+            Console.Write($"Ваши любимые цвета: ");
+            for(int i = 0; i < tuple.favcolors.Length; i++)
             {
-                switch (haveIPet)
-                {
-                    case "нету":
-                        break;
-
-                    case "есть":
-                        Console.Write("Сколько у вас питомцев? ");
-                        int pet = Convert.ToInt32(Console.ReadLine());
-                        CheckInformation(ref pet);
-                        string[] arrayWithNicknames = GetAnArrayOfNickname(pet);
-                        break;
-                    default:
-                        Console.WriteLine("Вы ответили неверно, повторите попытку!");
-                        Console.Write("Есть ли у вас питомец?(есть или нету): ");
-                        haveIPet = Console.ReadLine();
-                        break;
-                }
+                Console.Write($" {tuple.favcolors[i]} |");
             }
+            Console.WriteLine();
         }
+
 
         static string[] GetAnArrayOfNickname(int numberOfPets)
         {
@@ -113,7 +115,5 @@ namespace Итоговый_проект
                 else break;
             }
         }
-
-
     }
 }
