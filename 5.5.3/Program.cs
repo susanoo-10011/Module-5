@@ -10,14 +10,14 @@ namespace Module_5
     {
         static void Main(string[] args)
         {
-            /*Console.WriteLine("Напишите что-то");
+            Console.WriteLine("Напишите что-то");
             var str = Console.ReadLine();
 
             Console.WriteLine("Укажите глубину эха");
             var deep = int.Parse(Console.ReadLine());
 
-            //Echo(str, deep);
-            //Console.WriteLine(Factorial(20));*/
+            Echo(str, deep);
+            Console.WriteLine(Factorial(20));
 
             Console.WriteLine(PowerUp(2, 3));
 
