@@ -1,10 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Итоговый_проект
 {
@@ -56,26 +50,21 @@ namespace Итоговый_проект
             userData.favcolors = GetColors(colors);
 
             return userData;
-
         }
 
         static void ShowData((string name, string surname, int age, string[] petNames, string[] favcolors) GetUserData)
         {
-            var tuple = GetUserData;
+            var (name, surname, age, petNames, favcolors) = GetUserData;
             Console.WriteLine("\n------------------\n");
             Console.WriteLine("Вот что я узнал о вас: ");
-            Console.WriteLine($"Ваше имя: {tuple.name}.");
-            Console.WriteLine($"Ваша фамилия: {tuple.surname}.");
-            Console.WriteLine($"Ваш возраст: {tuple.age}.");
-
-            for(int i = 0; i < tuple.petNames.Length; i++)
-            Console.WriteLine($"Вашего {i+1}-ого питомца зовут '{tuple.petNames[i]}' ");
-
+            Console.WriteLine($"Ваше имя: {name}.");
+            Console.WriteLine($"Ваша фамилия: {surname}.");
+            Console.WriteLine($"Ваш возраст: {age}.");
+            for(int i = 0; i < petNames.Length; i++)
+                Console.WriteLine($"Вашего {i+1}-ого питомца зовут '{petNames[i]}' ");
             Console.Write($"Ваши любимые цвета: ");
-            for(int i = 0; i < tuple.favcolors.Length; i++)
-            {
-                Console.Write($" {tuple.favcolors[i]} |");
-            }
+            for(int i = 0; i < favcolors.Length; i++)
+                Console.Write($" {favcolors[i]} |");
             Console.WriteLine();
         }
 
@@ -83,7 +72,6 @@ namespace Итоговый_проект
         static string[] GetAnArrayOfNickname(int numberOfPets)
         {
             string[] arrayOfNicknames = new string[numberOfPets];
-
             for (int i = 0; i < numberOfPets; i++)
             {
                 Console.Write($"Введите кличку вашего {i + 1}-ого питомца: ");
